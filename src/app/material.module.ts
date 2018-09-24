@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatListModule,
@@ -21,6 +21,7 @@ import {
     MatTabsModule,
     MatCardModule,
     MatSelectModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     MatListModule],
   exports: [MatButtonModule,
@@ -34,6 +35,7 @@ import {
     MatToolbarModule,
     MatTabsModule,
     MatCardModule,
+    MatDialogModule,
     MatSelectModule,
     MatProgressSpinnerModule,
     MatListModule]
