@@ -12,7 +12,7 @@ import {
   MatNativeDateModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSortModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule
@@ -34,6 +34,7 @@ import {
     MatDialogModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    MatSortModule,
     MatListModule],
   exports: [MatButtonModule,
     MatIconModule,
@@ -50,6 +51,7 @@ import {
     MatSelectModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    MatSortModule,
     MatListModule]
 })
 export class MaterialModule {
