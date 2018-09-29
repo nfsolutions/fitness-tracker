@@ -3,6 +3,7 @@ import {Exercise} from './exercise.model';
 
 export class TrainingService {
   exerciseChanged = new Subject<Exercise>();
+  private exercises: Exercise[] = [];
 
   private availableExercises: Exercise[] = [
     {id: 'crunches', name: 'Crunches', duration: 30, calories: 8},
@@ -18,11 +19,35 @@ export class TrainingService {
   }
 
   startExercise(selectedId: string) {
+    this.exercises.push({...this.runningExercise});
     this.runningExercise = this.availableExercises.find(ex => ex.id === selectedId);
     this.exerciseChanged.next({...this.runningExercise});
   }
 
   getRunningExercise(): Exercise {
     return {...this.runningExercise};
+  }
+
+  completeExercise() {
+    this.exercises.push({
+      ...this.runningExercise,
+      date: new Date(),
+      state: 'completed'
+    });
+    this.runningExercise = null;
+    this.exerciseChanged.next(null);
+
+  }
+
+  cancelExercise(progress: number) {
+    this.exercises.push({
+      ...this.runningExercise,
+      date: new Date(),
+      duration: this.runningExercise.duration * (progress / 100),
+      calories: this.runningExercise.calories * (progress / 100),
+      state: 'cancelled'
+    });
+    this.runningExercise = null;
+    this.exerciseChanged.next(null);
   }
 }
