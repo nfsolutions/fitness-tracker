@@ -6,18 +6,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     SignupComponent,
     LoginComponent],
   imports: [
-    CommonModule,
-    FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     AngularFireAuthModule,
-    FlexLayoutModule],
+    SharedModule
+    ],
   exports: []
 })
 export class AuthModule {
