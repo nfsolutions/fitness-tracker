@@ -22,9 +22,9 @@ export class PastTrainingsComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnInit() {
     this.trainingService.fetchCompletedOrCancelledExercises();
     this.exChangedSubscription = this.trainingService.finishedExercisesChanged.subscribe((exercises: Exercise[]) => {
-        console.log('exercises', exercises);
-        this.dataSource.data = exercises;
-      });
+      console.log('exercises', exercises);
+      this.dataSource.data = exercises;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -38,6 +38,8 @@ export class PastTrainingsComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnDestroy(): void {
-    this.exChangedSubscription.unsubscribe();
+    if (this.exChangedSubscription) {
+      this.exChangedSubscription.unsubscribe();
+    }
   }
 }

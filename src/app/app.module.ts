@@ -33,7 +33,7 @@ import {TrainingModule} from './training/training.module';
     AppRoutingModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+
     AuthModule,
     TrainingModule
   ],
