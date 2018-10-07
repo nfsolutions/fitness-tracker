@@ -32,10 +32,15 @@ export class TrainingService {
             calories: doc.payload.doc.get('calories')
           };
         });
+        // throw (new Error());
       })).subscribe((exercises: Exercise[]) => {
         this.uiService.loadingStateChanged.next(false);
         this.availableExercises = exercises;
         this.exercisesChanged.next([...this.availableExercises]);
+      }, error => {
+        this.uiService.loadingStateChanged.next(false);
+        this.uiService.showSnackbar('Fetching exercises failed, please try again later', null, 3000);
+        this.exercisesChanged.next(null);
       }));
   }
 
