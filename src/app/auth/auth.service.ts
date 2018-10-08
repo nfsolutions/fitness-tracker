@@ -6,7 +6,8 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {TrainingService} from '../training/training.service';
 import {UiService} from '../shared/ui.service';
 import {Store} from '@ngrx/store';
-import * as fromApp from '../app.reducer';
+import * as fromRoot from '../app.reducer';
+import * as UI from '../shared/ui.actions';
 
 @Injectable()
 export class AuthService {
@@ -17,20 +18,21 @@ export class AuthService {
               private readonly afAuth: AngularFireAuth,
               private readonly trainingService: TrainingService,
               private readonly uiService: UiService,
-              private store: Store<{ui: fromApp.State}>) {
+              private store: Store<{ui: fromRoot.State}>) {
   }
 
   registerUser(authData: AuthData) {
     // this.uiService.loadingStateChanged.next(true);
-    this.store.dispatch({type: 'START_LOADING'});
+    // this.store.dispatch({type: 'START_LOADING'});
+    this.store.dispatch(new UI.StartLoading());
     this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         // this.uiService.loadingStateChanged.next(false);
-        this.store.dispatch({type: 'STOP_LOADING'});
+        this.store.dispatch(new UI.StopLoading());
         console.log(result);
       }).catch(error => {
       // this.uiService.loadingStateChanged.next(false);
-      this.store.dispatch({type: 'STOP_LOADING'});
+      this.store.dispatch(new UI.StopLoading());
       console.log(error);
       this.uiService.showSnackbar(error.message, null, 3000);
     });
@@ -53,16 +55,16 @@ export class AuthService {
 
   login(authData: AuthData) {
     // this.uiService.loadingStateChanged.next(true);
-    this.store.dispatch({type: 'START_LOADING'});
+    this.store.dispatch(new UI.StartLoading());
     this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         console.log(result);
         // this.uiService.loadingStateChanged.next(false);
-        this.store.dispatch({type: 'STOP_LOADING'});
+        this.store.dispatch(new UI.StopLoading());
       }).catch(error => {
       console.log(error);
       // this.uiService.loadingStateChanged.next(false);
-      this.store.dispatch({type: 'STOP_LOADING'});
+      this.store.dispatch(new UI.StopLoading());
       this.uiService.showSnackbar(error.message, null, 3000);
     });
   }
