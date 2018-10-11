@@ -54,11 +54,9 @@ export class AuthService {
     this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         console.log(result);
-        // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
       }).catch(error => {
       console.log(error);
-      // this.uiService.loadingStateChanged.next(false);
       this.store.dispatch(new UI.StopLoading());
       this.uiService.showSnackbar(error.message, null, 3000);
     });
